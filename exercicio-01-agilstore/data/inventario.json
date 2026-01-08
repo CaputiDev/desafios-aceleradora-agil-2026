@@ -1,12 +1,72 @@
 [
-    { "id": 1, "nome": "Notebook Dell Inspiron", "categoria": "Notebooks", "quantidade": 15, "preco": 3500.00 },
-    { "id": 2, "nome": "Mouse Logitech MX Master 3", "categoria": "Acessórios", "quantidade": 50, "preco": 450.00 },
-    { "id": 3, "nome": "Monitor LG Ultrawide 29", "categoria": "Monitores", "quantidade": 8, "preco": 1200.00 },
-    { "id": 4, "nome": "Teclado Mecânico Keychron", "categoria": "Periféricos", "quantidade": 20, "preco": 650.00 },
-    { "id": 5, "nome": "Headset HyperX Cloud II", "categoria": "Áudio", "quantidade": 12, "preco": 500.00 },
-    { "id": 6, "nome": "Cabo HDMI 2.0 2m", "categoria": "Cabos", "quantidade": 100, "preco": 35.00 },
-    { "id": 7, "nome": "Carregador Samsung 45W", "categoria": "Carregadores", "quantidade": 30, "preco": 180.00 },
-    { "id": 8, "nome": "SSD NVMe 1TB Kingston", "categoria": "Armazenamento", "quantidade": 25, "preco": 400.00 },
-    { "id": 9, "nome": "Webcam Logitech C920", "categoria": "Periféricos", "quantidade": 10, "preco": 380.00 },
-    { "id": 10, "nome": "Hub USB-C 7 em 1", "categoria": "Acessórios", "quantidade": 18, "preco": 220.00 }
+  {
+    "id": 1,
+    "nome": "Notebook Dell Inspiron",
+    "categoria": "Notebooks",
+    "quantidade": 15,
+    "preco": 3500
+  },
+  {
+    "id": 2,
+    "nome": "Mouse Logitech MX Master 3",
+    "categoria": "Acessórios",
+    "quantidade": 50,
+    "preco": 450
+  },
+  {
+    "id": 3,
+    "nome": "Geforce RTX 3060",
+    "categoria": "Placas de vídeo",
+    "quantidade": 10,
+    "preco": 2500.45
+  },
+  {
+    "id": 4,
+    "nome": "Teclado Mecânico Keychron",
+    "categoria": "Periféricos",
+    "quantidade": 20,
+    "preco": 650
+  },
+  {
+    "id": 5,
+    "nome": "Headset HyperX Cloud II",
+    "categoria": "Áudio",
+    "quantidade": 12,
+    "preco": 500
+  },
+  {
+    "id": 6,
+    "nome": "Cabo HDMI 2.0 2m",
+    "categoria": "Cabos",
+    "quantidade": 100,
+    "preco": 35
+  },
+  {
+    "id": 7,
+    "nome": "Carregador Samsung 45W",
+    "categoria": "Carregadores",
+    "quantidade": 30,
+    "preco": 180
+  },
+  {
+    "id": 8,
+    "nome": "SSD NVMe 1TB Kingston",
+    "categoria": "Armazenamento",
+    "quantidade": 25,
+    "preco": 400
+  },
+  {
+    "id": 9,
+    "nome": "Webcam Logitech C920",
+    "categoria": "Periféricos",
+    "quantidade": 10,
+    "preco": 380
+  },
+  {
+    "id": 10,
+    "nome": "Hub USB-C 7 em 1",
+    "categoria": "Acessórios",
+    "quantidade": 18,
+    "preco": 220
+  }
 ]

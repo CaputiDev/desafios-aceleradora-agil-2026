@@ -52,25 +52,67 @@ async function menuPrincipal() {
 }
 
 async function handleAdicionar() {
+    console.log("\n--- Novo Produto ---");
+
     const respostas = await inquirer.prompt([
         { name: 'nome', message: 'Nome do produto:' },
         { name: 'categoria', message: 'Categoria:' },
-        { name: 'quantidade', message: 'Quantidade em estoque:', type: 'number' },
-        { name: 'preco', message: 'Preço unitário:', type: 'number' }
+        { name: 'quantidade', message: 'Quantidade em estoque:', type: 'input' },
+        { name: 'preco', message: 'Preço unitário:', type: 'input' }
     ]);
 
     if (!respostas.nome || !respostas.categoria) {
-        console.log("Erro: Nome e Categoria são obrigatórios.");
+        console.log("Erro: Nome e Categoria são obrigatórios. Operação cancelada.");
         return;
     }
 
-    await adicionarProduto(respostas);
+    let qtdTratada = respostas.quantidade.replace(',', '.');
+    let qtdNumero = Number(qtdTratada);
+
+    if (!Number.isInteger(qtdNumero) || qtdNumero < 0) {
+        console.log("Erro: A quantidade deve ser um número INTEIRO positivo.");
+        return;
+    }
+
+    let precoTratado = respostas.preco.replace(',', '.');
+    let precoNumero = Number(precoTratado);
+
+    if (isNaN(precoNumero) || precoNumero < 0) {
+        console.log("Erro: O preço deve ser um valor numérico positivo.");
+        return;
+    }
+
+    const produtoFinal = {
+        nome: respostas.nome,
+        categoria: respostas.categoria,
+        quantidade: qtdNumero,
+        preco: precoNumero
+    };
+
+    await adicionarProduto(produtoFinal);
     console.log("Produto adicionado com sucesso!");
 }
 
 async function handleListar() {
     const produtos = await listarProdutos();
-    console.table(produtos);
+
+    const tabelaFormatada = produtos.reduce((acc, produto) => {
+        const precoFormatado = new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        }).format(produto.preco);
+
+        acc[produto.id] = {
+            'Nome': produto.nome,
+            'Categoria': produto.categoria,
+            'Qtd': produto.quantidade,
+            'Preço': precoFormatado
+        };
+
+        return acc;
+    }, {});
+
+    console.table(tabelaFormatada);
 }
 
 async function handleBuscar() {
@@ -83,7 +125,22 @@ async function handleBuscar() {
     if (resultados.length === 0) {
         console.log("Nenhum produto encontrado.");
     } else {
-        console.table(resultados);
+        const tabelaFormatada = resultados.reduce((acc, produto) => {
+            const precoFormatado = new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            }).format(produto.preco);
+    
+            acc[produto.id] = {
+                'Nome': produto.nome,
+                'Categoria': produto.categoria,
+                'Qtd': produto.quantidade,
+                'Preço': precoFormatado
+            };
+    
+            return acc;
+        }, {});
+        console.table(tabelaFormatada);
     }
 }
 
@@ -105,15 +162,41 @@ async function handleAtualizar() {
     const novosDados = await inquirer.prompt([
         { name: 'nome', message: `Nome (${produtoAtual.nome}):` },
         { name: 'categoria', message: `Categoria (${produtoAtual.categoria}):` },
-        { name: 'quantidade', message: `Quantidade (${produtoAtual.quantidade}):` },
-        { name: 'preco', message: `Preço (${produtoAtual.preco}):` }
+        { name: 'quantidade', message: `Quantidade (${produtoAtual.quantidade}):`, type: 'input' },
+        { name: 'preco', message: `Preço (${produtoAtual.preco}):`, type: 'input' }
     ]);
 
     const dadosParaSalvar = {};
+
     if (novosDados.nome) dadosParaSalvar.nome = novosDados.nome;
     if (novosDados.categoria) dadosParaSalvar.categoria = novosDados.categoria;
-    if (novosDados.quantidade) dadosParaSalvar.quantidade = Number(novosDados.quantidade);
-    if (novosDados.preco) dadosParaSalvar.preco = Number(novosDados.preco);
+
+    if (novosDados.quantidade) {
+        let qtdTratada = novosDados.quantidade.replace(',', '.');
+        let qtdNumero = Number(qtdTratada);
+        
+        if (!Number.isInteger(qtdNumero) || qtdNumero < 0) {
+            console.log("Erro: Quantidade inválida. Deve ser inteiro positivo.");
+            return;
+        }
+        dadosParaSalvar.quantidade = qtdNumero;
+    }
+
+    if (novosDados.preco) {
+        let precoTratado = novosDados.preco.replace(',', '.');
+        let precoNumero = Number(precoTratado);
+
+        if (isNaN(precoNumero) || precoNumero < 0) {
+            console.log("Erro: Preço inválido.");
+            return;
+        }
+        dadosParaSalvar.preco = precoNumero;
+    }
+
+    if (Object.keys(dadosParaSalvar).length === 0) {
+        console.log("Nenhuma alteração realizada.");
+        return;
+    }
 
     await atualizarProduto(id, dadosParaSalvar);
     console.log("Produto atualizado com sucesso!");
