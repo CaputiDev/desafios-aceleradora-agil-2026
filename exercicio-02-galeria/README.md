@@ -44,4 +44,4 @@ npm run dev
 
 5. Abra no navegador: http://localhost:5173
 
-- Versão online: [https://galeria-desafios-aceleradora-agil-2.vercel.app/](https://galeria-desafios-aceleradora-agil-2.vercel.app/)
+- Versão online: [https://galeria-desafios-aceleradora-agil.vercel.app/](https://galeria-desafios-aceleradora-agil.vercel.app/)
