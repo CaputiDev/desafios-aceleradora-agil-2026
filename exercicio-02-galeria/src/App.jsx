@@ -13,7 +13,7 @@ function App() {
     useEffect(() => {
         const buscarFotos = async () => {
             try {
-                const resposta = await fetch('https://picsum.photos/v2/list?page=1&limit=30');
+                const resposta = await fetch('https://picsum.photos/v2/list?page=1&limit=100');
                 const dados = await resposta.json();
 
                 const dadosFormatados = dados.map((foto) => ({
