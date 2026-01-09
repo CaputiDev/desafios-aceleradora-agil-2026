@@ -5,7 +5,7 @@ const SearchBar = ({ termoBusca, setTermoBusca }) => {
         <div className="search-bar">
             <input
                 type="text"
-                placeholder="Pesquise por uma foto(Autor)..."
+                placeholder="Pesquise por uma foto (nome do autor)"
                 value={termoBusca}
                 onChange={(e) => setTermoBusca(e.target.value)}
             />
