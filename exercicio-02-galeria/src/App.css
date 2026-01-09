@@ -115,9 +115,9 @@ body {
    Grid de Fotos
 ================================ */
 .photo-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 20px;
+display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
     flex: 1;
 }
 
@@ -126,7 +126,6 @@ body {
 ================================ */
 .photo-card {
     background-color: var(--card-bg);
-    padding: 0; 
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-sm);
     text-align: center;
@@ -142,7 +141,7 @@ body {
 
 .photo-card img {
     width: 100%;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 3 / 2;
     object-fit: cover;
     margin: 0;
     display: block
