@@ -57,6 +57,8 @@ npm run dev
 - **React**: Biblioteca para construção da interface de usuário. Utilizada para criar uma arquitetura baseada em componentes reutilizáveis e para o gerenciamento de estado (Hooks) da busca em tempo real.
 - **Vite**: Ferramenta de build e ambiente de desenvolvimento. Escolhida por sua alta performance e Hot Module Replacement (HMR) instantâneo, garantindo um fluxo de desenvolvimento ágil e uma build de produção otimizada.
 
+> Utilizei a api pública [picsum.photos](https://picsum.photos/) para fazer as requisições de fotos.
+
 ### Como rodar localmente
 
 **Requisitos**
