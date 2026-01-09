@@ -1,35 +1,47 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.jsx
+import { useState } from 'react';
+import './App.css';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import SearchBar from './components/SearchBar';
+import PhotoCard from './components/PhotoCard';
+import { fotos } from './data/database';
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [busca, setBusca] = useState('');
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    // Lógica de Filtragem:
+    // Filtra o array original baseado no texto digitado (case insensitive)
+    const fotosFiltradas = fotos.filter((foto) =>
+        foto.nome.toLowerCase().includes(busca.toLowerCase())
+    );
+
+    return (
+        <div className="container">
+            <Header />
+
+            <SearchBar termoBusca={busca} setTermoBusca={setBusca} />
+
+            <main className="photo-grid">
+                {/* Verifica se existem fotos após o filtro */}
+                {fotosFiltradas.length > 0 ? (
+                    fotosFiltradas.map((foto) => (
+                        <PhotoCard
+                            key={foto.id}
+                            nome={foto.nome}
+                            url={foto.url}
+                        />
+                    ))
+                ) : (
+                    <div className="no-results">
+                        <p>Nenhuma foto encontrada para "{busca}"</p>
+                    </div>
+                )}
+            </main>
+
+            <Footer />
+        </div>
+    );
 }
 
-export default App
+export default App;
