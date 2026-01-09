@@ -1,6 +1,5 @@
 import React from 'react';
 
-// Recebe o valor atual e a função para atualizar (props)
 const SearchBar = ({ termoBusca, setTermoBusca }) => {
     return (
         <div className="search-bar">

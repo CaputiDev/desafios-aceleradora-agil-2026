@@ -1,17 +1,43 @@
-// src/App.jsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import SearchBar from './components/SearchBar';
 import PhotoCard from './components/PhotoCard';
-import { fotos } from './data/database';
 
 function App() {
+    const [fotos, setFotos] = useState([]);
     const [busca, setBusca] = useState('');
+    const [carregando, setCarregando] = useState(true);
 
-    // Lógica de Filtragem:
-    // Filtra o array original baseado no texto digitado (case insensitive)
+    useEffect(() => {
+        const buscarFotos = async () => {
+            try {
+                // Usamos a API do Lorem Picsum para pegar uma lista de 30 fotos reais
+                const resposta = await fetch('https://picsum.photos/v2/list?page=1&limit=30');
+                const dados = await resposta.json();
+
+                // Mapeamos os dados para o formato que nosso sistema entende
+                const dadosFormatados = dados.map((foto) => ({
+                    id: foto.id,
+                    nome: foto.author, // Usaremos o nome do fotógrafo como título
+                    // Montamos a URL pedindo a foto no tamanho 300x200 para carregar rápido
+                    url: `https://picsum.photos/id/${foto.id}/300/200`
+                }));
+
+                setFotos(dadosFormatados);
+            } catch (erro) {
+                console.error("Erro ao buscar fotos:", erro);
+                alert("Erro ao carregar fotos. Verifique sua internet.");
+            } finally {
+                setCarregando(false);
+            }
+        };
+
+        buscarFotos();
+    }, []);
+
+    // Lógica de Filtragem (Filtra pelo nome do fotógrafo)
     const fotosFiltradas = fotos.filter((foto) =>
         foto.nome.toLowerCase().includes(busca.toLowerCase())
     );
@@ -23,19 +49,24 @@ function App() {
             <SearchBar termoBusca={busca} setTermoBusca={setBusca} />
 
             <main className="photo-grid">
-                {/* Verifica se existem fotos após o filtro */}
-                {fotosFiltradas.length > 0 ? (
-                    fotosFiltradas.map((foto) => (
-                        <PhotoCard
-                            key={foto.id}
-                            nome={foto.nome}
-                            url={foto.url}
-                        />
-                    ))
+                {carregando ? (
+                    <div className="loading">Carregando galeria...</div>
                 ) : (
-                    <div className="no-results">
-                        <p>Nenhuma foto encontrada para "{busca}"</p>
-                    </div>
+                    <>
+                        {fotosFiltradas.length > 0 ? (
+                            fotosFiltradas.map((foto) => (
+                                <PhotoCard
+                                    key={foto.id}
+                                    nome={foto.nome}
+                                    url={foto.url}
+                                />
+                            ))
+                        ) : (
+                            <div className="no-results">
+                                <p>Nenhum fotógrafo encontrado com o nome "{busca}"</p>
+                            </div>
+                        )}
+                    </>
                 )}
             </main>
 
