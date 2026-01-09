@@ -13,15 +13,12 @@ function App() {
     useEffect(() => {
         const buscarFotos = async () => {
             try {
-                // Usamos a API do Lorem Picsum para pegar uma lista de 30 fotos reais
                 const resposta = await fetch('https://picsum.photos/v2/list?page=1&limit=30');
                 const dados = await resposta.json();
 
-                // Mapeamos os dados para o formato que nosso sistema entende
                 const dadosFormatados = dados.map((foto) => ({
                     id: foto.id,
-                    nome: foto.author, // Usaremos o nome do fotógrafo como título
-                    // Montamos a URL pedindo a foto no tamanho 300x200 para carregar rápido
+                    nome: foto.author,
                     url: `https://picsum.photos/id/${foto.id}/300/200`
                 }));
 
@@ -37,7 +34,6 @@ function App() {
         buscarFotos();
     }, []);
 
-    // Lógica de Filtragem (Filtra pelo nome do fotógrafo)
     const fotosFiltradas = fotos.filter((foto) =>
         foto.nome.toLowerCase().includes(busca.toLowerCase())
     );
