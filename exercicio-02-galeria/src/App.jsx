@@ -13,13 +13,13 @@ function App() {
     useEffect(() => {
         const buscarFotos = async () => {
             try {
-                const resposta = await fetch('https://picsum.photos/v2/list?page=1&limit=100');
+                const resposta = await fetch('https://picsum.photos/v2/list?page=1&limit=1000');
                 const dados = await resposta.json();
 
                 const dadosFormatados = dados.map((foto) => ({
                     id: foto.id,
                     nome: foto.author,
-                    url: `https://picsum.photos/id/${foto.id}/300/200`
+                    url: `https://picsum.photos/id/${foto.id}/1200/800`
                 }));
 
                 setFotos(dadosFormatados);

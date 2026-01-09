@@ -39,7 +39,7 @@ body {
    Layout Principal
 ================================ */
 .container {
-    max-width: 1200px;
+    max-width: 100%;
     margin: 0 auto;
     padding: 24px;
     min-height: 100vh;
@@ -111,52 +111,52 @@ body {
     transform: scale(1.05);
 }
 
-.search-bar button svg {
-    transition: transform 0.2s ease;
-}
-
-.search-bar button:hover svg {
-    transform: scale(1.1);
-}
 /* ===============================
    Grid de Fotos
 ================================ */
 .photo-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
     flex: 1;
 }
 
 /* ===============================
-   Card da Foto
+   Card da Foto (MODIFICADO)
 ================================ */
 .photo-card {
     background-color: var(--card-bg);
-    padding: 12px;
+    padding: 0; 
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-sm);
     text-align: center;
     cursor: pointer;
     transition: transform var(--transition), box-shadow var(--transition);
+    overflow: hidden;
 }
 
 .photo-card:hover {
-    transform: translateY(-6px) scale(1.03);
+    transform: translateY(-6px) scale(1.02);
     box-shadow: var(--shadow-md);
 }
 
 .photo-card img {
     width: 100%;
-    height: 200px;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
-    border-radius: var(--radius-sm);
-    margin-bottom: 12px;
+    margin: 0;
+    display: block
+}
+
+.photo-info {
+    padding: 16px;
+    background-color: #fff;
 }
 
 .photo-card h3 {
     font-size: 1.05rem;
     color: #555;
+    margin: 0;
 }
 
 /* ===============================
