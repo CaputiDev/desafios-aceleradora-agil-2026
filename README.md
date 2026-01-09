@@ -1,4 +1,4 @@
-# Documentação completa no [diretório raiz](../)
+# Documentação completa na branch **MAIN**
 
 ## Enunciado 01 - AgilStore
 
