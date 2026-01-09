@@ -21,7 +21,7 @@ function App() {
             const dadosFormatados = dados.map((foto) => ({
                 id: foto.id,
                 nome: foto.author,
-                url: `https://picsum.photos/id/${foto.id}/800`
+                url: `https://picsum.photos/id/${foto.id}/800/533`
             }));
 
             setFotos((prevFotos) => {
