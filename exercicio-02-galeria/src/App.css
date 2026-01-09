@@ -117,8 +117,8 @@ body {
 .photo-grid {
 display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    justify-content: center;
     gap: 30px;
-    flex: 1;
 }
 
 /* ===============================
@@ -132,6 +132,7 @@ display: grid;
     cursor: pointer;
     transition: transform var(--transition), box-shadow var(--transition);
     overflow: hidden;
+
 }
 
 .photo-card:hover {
