@@ -1,3 +1,5 @@
+# Documentação completa no [diretório raiz](../)
+
 ## Enunciado 02 - Galeria de Fotos
 
 ### Tecnologias utilizadas
