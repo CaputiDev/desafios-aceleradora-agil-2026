@@ -7,7 +7,7 @@
     "inquirer": "^9.0.0"
   },
   "scripts": {
-    "start": "node src/index.js"
+    "dev": "node src/index.js"
   },
   "keywords": [],
   "author": "",
