@@ -209,3 +209,56 @@ body {
         grid-template-columns: 1fr;
     }
 }
+/* ===============================
+   Botão Voltar ao Topo
+================================ */
+.btn-voltar-topo {
+    position: fixed; /* Fixa o botão na tela mesmo com scroll */
+    bottom: 30px;    /* Distância do fundo */
+    right: 30px;     /* Distância da direita */
+    
+    width: 50px;
+    height: 50px;
+    
+    background-color: var(--primary); /* Azul do seu tema */
+    color: white;
+    
+    border: none;
+    border-radius: 50%; /* Deixa redondinho */
+    
+    font-size: 1.5rem;
+    cursor: pointer;
+    
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra para destacar */
+    
+    z-index: 1000; 
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    animation: fadeIn 0.3s ease-in-out; /* Efeito suave ao aparecer */
+}
+
+/* Efeito ao passar o mouse */
+.btn-voltar-topo:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-5px); /* Sobe um pouquinho */
+}
+
+/* Animaçãozinha de entrada */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Ajuste para celular para não cobrir conteúdo importante */
+@media (max-width: 600px) {
+    .btn-voltar-topo {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+    }
+}

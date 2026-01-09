@@ -9,6 +9,7 @@ function App() {
     const [fotos, setFotos] = useState([]);
     const [busca, setBusca] = useState('');
     const [carregando, setCarregando] = useState(true);
+    const [mostrarBotao, setMostrarBotao] = useState(false);
 
     useEffect(() => {
         const buscarFotos = async () => {
@@ -33,6 +34,29 @@ function App() {
 
         buscarFotos();
     }, []);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 300) {
+                setMostrarBotao(true);
+            } else {
+                setMostrarBotao(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    const voltarAoTopo = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    };
 
     const fotosFiltradas = fotos.filter((foto) =>
         foto.nome.toLowerCase().includes(busca.toLowerCase())
@@ -67,6 +91,11 @@ function App() {
             </main>
 
             <Footer />
+            {mostrarBotao && (
+                <button onClick={voltarAoTopo} className="btn-voltar-topo">
+                    ⬆
+                </button>
+            )}
         </div>
     );
 }
