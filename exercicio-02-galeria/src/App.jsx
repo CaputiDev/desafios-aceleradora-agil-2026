@@ -103,7 +103,7 @@ function App() {
                 ) : (
                     !carregando && (
                         <div className="no-results">
-                            <p>Nenhum fotógrafo encontrado com o nome "{busca}"</p>
+                            <p>Nenhuma foto encontrada</p>
                         </div>
                     )
                 )}
