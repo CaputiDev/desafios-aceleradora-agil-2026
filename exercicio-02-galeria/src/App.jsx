@@ -8,6 +8,7 @@ import PhotoCard from './components/PhotoCard';
 function App() {
     const [fotos, setFotos] = useState([]);
     const [busca, setBusca] = useState('');
+    const [filtroAtivo, setFiltroAtivo] = useState('');
     const [carregando, setCarregando] = useState(false);
     const [pagina, setPagina] = useState(1);
     const [mostrarBotao, setMostrarBotao] = useState(false);
@@ -72,15 +73,23 @@ function App() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
+    const executarBusca = () => {
+        setFiltroAtivo(busca);
+    };
+
     const fotosFiltradas = fotos.filter((foto) =>
-        foto.nome.toLowerCase().includes(busca.toLowerCase())
+        foto.nome.toLowerCase().includes(filtroAtivo.toLowerCase())
     );
 
     return (
         <div className="container">
             <Header />
 
-            <SearchBar termoBusca={busca} setTermoBusca={setBusca} />
+            <SearchBar
+                termoBusca={busca}
+                setTermoBusca={setBusca} 
+                aoBuscar={executarBusca}
+                />
 
             <main className="photo-grid">
                 {fotosFiltradas.length > 0 ? (
@@ -98,12 +107,12 @@ function App() {
                         </div>
                     )
                 )}
-                
+
                 {carregando && <div className="loading">Carregando mais fotos...</div>}
             </main>
 
             <Footer />
-            
+
             {mostrarBotao && (
                 <button onClick={voltarAoTopo} className="btn-voltar-topo">
                     ⬆

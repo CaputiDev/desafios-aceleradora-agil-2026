@@ -1,15 +1,23 @@
 import React from 'react';
 
-const SearchBar = ({ termoBusca, setTermoBusca }) => {
+const SearchBar = ({ termoBusca, setTermoBusca, aoBuscar }) => {
+    
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            aoBuscar();
+        }
+    };
+
     return (
         <div className="search-bar">
             <input
                 type="text"
-                placeholder="Pesquise por uma foto (nome do autor)"
+                placeholder="Pesquisar por autor..."
                 value={termoBusca}
                 onChange={(e) => setTermoBusca(e.target.value)}
+                onKeyDown={handleKeyDown}
             />
-            <button aria-label="Buscar">
+            <button aria-label="Buscar" onClick={aoBuscar}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
